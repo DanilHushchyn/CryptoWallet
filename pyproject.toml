@@ -7,6 +7,25 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.104.1"}
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+python-socketio = "^5.10.0"
+propan = {extras = ["async-rabbit"], version = "^0.1.5.24"}
+psycopg2-binary = "^2.9.9"
+sqlalchemy = "^2.0.23"
+django-environ = "^0.11.2"
+dependency-injector = "^4.41.0"
+sqlalchemy-utils = "^0.41.1"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+asyncpg = "^0.29.0"
+alembic = "^1.13.0"
+pyjwt = "^2.8.0"
+celery = "^5.3.6"
+asgiref = "^3.7.2"
+fastapi-mail = "^1.4.1"
+boto3 = "^1.33.10"
+redis = "^5.0.1"
+web3 = "^6.11.4"
 
 
 [build-system]
