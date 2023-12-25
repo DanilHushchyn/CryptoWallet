@@ -1,0 +1,40 @@
+.wallets__img {
+  width: 25px;
+  height: 25px;
+  color: #7367f0;
+}
+
+.wallets__txt {
+  display: inline-block;
+  width: 450px;
+}
+
+@media screen and (max-width: 600px) {
+  .wallets__txt {
+    font-size: 15px;
+    letter-spacing: 5px;
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .wallets__txt {
+    font-size: 13px;
+  }
+  .wallets__img {
+    width: 15px;
+    height: 15px;
+    color: #7367f0;
+  }
+}
+@media screen and (max-width: 450px) {
+  .wallets__txt {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 355px) {
+  .wallets__txt {
+    font-size: 7px;
+  }
+}
+
+/*# sourceMappingURL=profile.css.map */

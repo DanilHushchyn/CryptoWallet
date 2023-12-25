@@ -7,10 +7,20 @@ from starlette.staticfiles import StaticFiles
 from fastapi_mail import ConnectionConfig
 
 from config.settings import RABBITMQ_URL, URL
+from config_socketio.socketio_app import socket_app
+from src.chat.endpoints import chat_router
+from src.chat.views import chat_views
+from src.delivery.consumers import delivery_broker_router
+from src.delivery.endpoints import delivery_router
 from src.gateway import models
 from src.gateway.register import RegisterContainer
 from src.gateway.endpoints import main_router
+from src.gateway.views import gateway_views
+from src.ibay.endpoints import product_router
+from src.ibay.views import ibay_views
+from src.wallet.consumers import wallet_broker_router
 from src.wallet.endpoints import wallet_router
+from src.wallet.views import wallet_views
 
 broker = RabbitBroker(RABBITMQ_URL)
 
@@ -19,6 +29,7 @@ origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
 ]
+API_PREFIX = "/api/v1"
 
 
 def create_app() -> FastAPI:
@@ -28,11 +39,20 @@ def create_app() -> FastAPI:
                   version='1.0.1',
                   )
     app.container = container
-    # engine = create_engine(URL)
-    # models.Base.metadata.create_all(bind=engine)
 
-    app.include_router(main_router)
-    app.include_router(wallet_router)
+    # ENDPOINTS
+    app.include_router(main_router, prefix=API_PREFIX)
+    app.include_router(wallet_router, prefix=API_PREFIX)
+    app.include_router(chat_router, prefix=API_PREFIX)
+    app.include_router(product_router, prefix=API_PREFIX, tags=['product'])
+    app.include_router(delivery_router, prefix=API_PREFIX, tags=['delivery'])
+
+    # VIEWS
+    app.include_router(wallet_views)
+    app.include_router(ibay_views)
+    app.include_router(gateway_views)
+    app.include_router(chat_views)
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
@@ -40,7 +60,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    # app.mount("/socket.io", socket_app)
+    app.mount("/socket.io", socket_app)
     app.mount("/static", StaticFiles(directory="static"), name="static")
     return app
 
@@ -51,6 +71,8 @@ app = create_app()
 @app.on_event('startup')
 async def publish_smtp():
     app.broker = broker
+    app.broker.include_router(wallet_broker_router)
+    app.broker.include_router(delivery_broker_router)
     await broker.start()
 
 

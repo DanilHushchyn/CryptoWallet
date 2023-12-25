@@ -29,7 +29,7 @@ class UserRepository:
         async with self.session_factory() as session:
             user = await session.get(User, user_id)
             if not user:
-                raise HTTPException(status_code=401, detail=f"User not found, id: {user_id}")
+                raise HTTPException(status_code=401, detail=f"User not found ☹, id: {user_id}")
             return UserForm(id=user.id, email=user.email, username=user.username, avatar=user.avatar)
 
     async def add(self, user_model: UserModel) -> User:
@@ -44,7 +44,7 @@ class UserRepository:
         async with self.session_factory() as session:
             user = await session.get(User, user_id)
             if not user:
-                raise HTTPException(status_code=401, detail=f"User not found, id: {user_id}")
+                raise HTTPException(status_code=401, detail=f"User not found ☹, id: {user_id}")
             await session.delete(user)
             await session.commit()
 
@@ -93,7 +93,7 @@ class AuthRepository:
             try:
                 _user = result.scalar_one()
             except:
-                raise HTTPException(status_code=401, detail="Wrong email address or password")
+                raise HTTPException(status_code=401, detail="Wrong email or password ☹")
 
             if pbkdf2_sha256.verify(user.password, _user.password):
                 payload = {"id": _user.id,
@@ -101,7 +101,6 @@ class AuthRepository:
                 if not user.remember:
                     expiration_time = datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=15)
                     payload["exp"] = expiration_time
-
                 token = jwt.encode(
                     payload,
                     JWT_SECRET,
@@ -109,25 +108,25 @@ class AuthRepository:
                 )
                 return token
             else:
-                raise HTTPException(status_code=401, detail="Wrong email address or password")
+                raise HTTPException(status_code=401, detail="Wrong email or password ☹")
 
     async def add(self, user_model: RegisterUserModel) -> UserForm:
         async with self.session_factory() as session:
             try:
                 user = User(email=user_model.email, password=user_model.password, username=user_model.username,
-                            avatar='default')
+                            avatar='https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png')
                 session.add(user)
                 await session.commit()
                 await session.refresh(user)
                 return UserForm(id=user.id, email=user.email, username=user.username, avatar=user.avatar)
             except:
-                raise HTTPException(status_code=401, detail=f"User with email already exist")
+                raise HTTPException(status_code=401, detail=f"User with current email already exist ☹")
 
     async def get_access(self, user_id, access: bool = True):
         async with self.session_factory() as session:
             user = await session.get(User, user_id)
             if not user:
-                raise HTTPException(status_code=401, detail=f"User not found, id: {user_id}")
+                raise HTTPException(status_code=401, detail=f"User not found ☹, id: {user_id}")
             user.chat_access = access
             await session.commit()
             await session.refresh(user)

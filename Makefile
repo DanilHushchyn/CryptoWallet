@@ -3,7 +3,7 @@ run:
 
 
 socketio:
-	uvicorn config_socketio.socket_app:socket_app --reload --port 8001
+	uvicorn config_socketio.socketio_app:socket_app --reload --port 8001
 
 
 worker:

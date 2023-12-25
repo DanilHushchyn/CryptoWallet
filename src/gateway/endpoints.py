@@ -23,9 +23,8 @@ from src.gateway.services.users import UserService
 from utils.auth_operations import get_user_from_bearer
 from src.gateway.tasks import mailing_task
 
-API_PREFIX = "/api/v1"
 
-main_router = APIRouter(prefix=API_PREFIX)
+main_router = APIRouter()
 user_auth = CustomJWTAuth()
 
 
@@ -103,7 +102,8 @@ async def login(
         response.set_cookie(key="access_token", value=f'Bearer {token}',
                             expires=expire_time.strftime('%a, %d-%b-%Y %T GMT'))
     else:
-        response.set_cookie(key="access_token", value=f'Bearer {token}', max_age=100000)
+        response.set_cookie(key="access_token", value=f'Bearer {token}', max_age=10_000_000_000)
+
     return response
 
 

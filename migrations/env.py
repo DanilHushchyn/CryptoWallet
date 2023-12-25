@@ -13,6 +13,9 @@ from src.gateway.db import SQLALCHEMY_DATABASE_URL
 from src.gateway.db import Base
 import src.gateway.models
 import src.wallet.models
+import src.chat.models
+import src.ibay.models
+import src.delivery.models
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

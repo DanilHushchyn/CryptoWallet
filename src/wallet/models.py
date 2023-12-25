@@ -18,7 +18,6 @@ class Asset(Base):
     image = Column(URLType, nullable=True)
     symbol = Column(String)
     decimal_places = Column(Integer, default=0)
-
     blockchain_id = Column(Integer, ForeignKey('blockchains.id'))
     blockchain = relationship('Blockchain', foreign_keys=[blockchain_id])
 

@@ -47,6 +47,9 @@ CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 QUICKNODE_URL = env('QUICKNODE_URL')
 MORALIS_API_KEY = env('MORALIS_API_KEY')
 
+SPACES_ACCESS_KEY_ID = env('SPACES_ACCESS_KEY_ID')
+SPACES_SECRET_ACCESS_KEY = env('SPACES_SECRET_ACCESS_KEY')
+BUCKET = env('BUCKET')
 
 ALLOWED_HOSTS = ['http://127.0.0.1:8000']
 
@@ -56,4 +59,9 @@ WIRING_CONFIG = [
     'src.gateway',
     'src.web3',
     'src.wallet',
+    'src.chat',
+    'src.ibay',
+    'src.delivery',
+    'src.boto3',
+    # 'src.parser',
 ]

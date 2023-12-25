@@ -8,6 +8,7 @@ from propan import RabbitBroker
 from web3 import AsyncWeb3, AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
 from config.settings import QUICKNODE_URL, MORALIS_API_KEY, RABBITMQ_URL
+from src.web3.repository import WebRepository
 
 
 # from src.web3.repository import WebRepository
@@ -22,9 +23,8 @@ class WebService:
     new_block = None
     old_block = None
 
-    # def __init__(self, web3_repository: WebRepository) -> None:
-    def __init__(self) -> None:
-        # self._repository: WebRepository = web3_repository
+    def __init__(self, web3_repository: WebRepository):
+        self._repository: WebRepository = web3_repository
         self.w3 = AsyncWeb3(AsyncHTTPProvider(QUICKNODE_URL), modules={'eth': (AsyncEth,)})
         self.socket_w3 = Web3(Web3.WebsocketProvider(
             'wss://blissful-side-panorama.ethereum-sepolia.quiknode.pro/3a09730228a180516dca38e9d88d5693881d84cd/'))
@@ -73,9 +73,8 @@ class WebService:
                     transactions_list.append(trans)
                 return transactions_list
             else:
-                # print("Ошибка при запросе к Moralis API:", response.status_code)
                 raise HTTPException(status_code=401,
-                                    detail=f"Ошибка при запросе к Moralis API:, {response.status_code}")
+                                    detail=f"Moralis API пишет данные неверны:, {response.status_code}")
 
     async def get_transaction(self, _hash):
         try:
@@ -109,6 +108,55 @@ class WebService:
     #         'status': status
     #     }
     #     return tx_info
+
+    async def transaction(self, private_key_sender, receiver_address, value):
+        try:
+
+            # Приватный ключ отправителя
+            private_key_sender = private_key_sender
+            # Адрес отправителя (получается из приватного ключа)
+            sender_account = Account.from_key(private_key_sender)
+            sender_address = sender_account.address
+
+            # Адрес получателя
+            receiver_address = receiver_address
+
+            asset = await self.get_wallet_asset(sender_address, receiver_address)
+
+            # Получение nonce для подписи транзакции
+            nonce = await self.w3.eth.get_transaction_count(sender_address)
+            # Создание транзакции
+            transaction = {
+                'to': receiver_address,
+                'value': self.w3.to_wei(value, asset.abbreviation),  # Сумма для перевода в Wei (0.1 ETH)
+                'gas': 21000,  # Лимит газа для базовой транзакции
+                'gasPrice': self.w3.to_wei('50', 'gwei'),  # Цена газа в Wei
+                'nonce': nonce,
+                'chainId': await self.w3.eth.chain_id,  # ID сети (Ropsten)
+            }
+            # Подпись транзакции с использованием приватного ключа
+            signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key_sender)
+            # Отправка транзакции на блокчейн
+            tx_hash = await self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+            # return {'tx_hash': tx_hash.hex()}
+            trans_data = {
+                "hash": tx_hash.hex(),
+                "from_address": sender_address,
+                "to_address": receiver_address,
+                "value": value,
+            }
+            return trans_data
+        except:
+            raise HTTPException(status_code=401,
+                                detail='Something went wrong, please make sure you entered the correct details and/or you have enough funds to complete the transaction.')
+
+    async def get_wallet_asset(self, from_address, to_address):
+        asset = await self._repository.get_asset(from_address, to_address)
+        if asset:
+            return asset
+        else:
+            raise HTTPException(status_code=401,
+                                detail='Not found asset for wallet.')
 
     async def get_balance(self, address):
         balance_wei = await self.w3.eth.get_balance(address)
