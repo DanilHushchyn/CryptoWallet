@@ -73,19 +73,30 @@ class WalletService:
             private_key_sender = wallet.private_key
             trans_data = await self.w3_service.transaction(private_key_sender, to_address, value)
             transaction = await self._repository.create_or_update(trans_data)
-            await self.update_transactions_table(from_address, to_address)
+            transaction_data = {
+                "value": transaction.value,
+                "to_address": transaction.to_address,
+                "txn_fee": transaction.txn_fee,
+                "hash": transaction.hash,
+                "from_address": transaction.from_address,
+                "date": transaction.date,
+                "status": transaction.status
+            }
+            await self.update_transactions_table(from_address, to_address, transaction_data)
             return transaction
         except:
             raise HTTPException(status_code=401,
                                 detail='Wrong wallet data or value.')
 
-    async def update_transactions_table(self, from_address, to_address):
+    async def update_transactions_table(self, from_address, to_address, transaction):
         wallets = [from_address, to_address]
         for address in wallets:
             wallet = await self._repository.check_wallet(address)
             async with RabbitBroker(RABBITMQ_URL) as broker:
-                await broker.publish(message={'address': wallet.address, 'room': wallet.user.id},
-                                     queue='socketio/update_transactions_table')
+                await broker.publish(
+                    message={'address': wallet.address, 'wallet_id': wallet.id, 'transaction': transaction,
+                             'room': wallet.user.id},
+                    queue='socketio/update_transactions_table')
 
     async def get_db_transaction(self, address):
         return await self._repository.get_db_transaction(address)

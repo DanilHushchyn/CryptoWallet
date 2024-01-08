@@ -10,8 +10,6 @@ from config.settings import JWT_SECRET, ALGORITHM
 from src.gateway.schemas import RegisterUserModel, UserForm
 import jwt
 
-from src.gateway.tasks import mailing_task
-
 
 class UserRepository:
 
@@ -30,7 +28,7 @@ class UserRepository:
             user = await session.get(User, user_id)
             if not user:
                 raise HTTPException(status_code=401, detail=f"User not found ☹, id: {user_id}")
-            return UserForm(id=user.id, email=user.email, username=user.username, avatar=user.avatar)
+            return UserForm(id=user.id, email=user.email, username=user.username, avatar=user.avatar,)
 
     async def add(self, user_model: UserModel) -> User:
         async with self.session_factory() as session:

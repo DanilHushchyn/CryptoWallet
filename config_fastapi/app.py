@@ -7,6 +7,7 @@ from starlette.staticfiles import StaticFiles
 from fastapi_mail import ConnectionConfig
 
 from config.settings import RABBITMQ_URL, URL
+from config_socketio.consumers import socketio_router
 from config_socketio.socketio_app import socket_app
 from src.chat.endpoints import chat_router
 from src.chat.views import chat_views
@@ -73,6 +74,7 @@ async def publish_smtp():
     app.broker = broker
     app.broker.include_router(wallet_broker_router)
     app.broker.include_router(delivery_broker_router)
+    app.broker.include_router(socketio_router)
     await broker.start()
 
 

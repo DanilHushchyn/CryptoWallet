@@ -20,13 +20,13 @@ async def send_message(message: MessageForm, chat_service: ChatService = Depends
     user_id = await get_user_from_bearer(bearer)
     return await chat_service.send_message(message, user_id)
 
+
 @chat_router.get("/chat_access", tags=['chat'], status_code=status.HTTP_201_CREATED)
 @inject
 async def chat_access(chat_service: ChatService = Depends(Provide[ChatContainer.chat_service]),
-                       bearer: HTTPAuthorizationCredentials = Depends(user_auth)):
+                      bearer: HTTPAuthorizationCredentials = Depends(user_auth)):
     user_id = await get_user_from_bearer(bearer)
     return await chat_service.chat_access(user_id)
-
 
 
 @chat_router.get("/get_chat", tags=['chat'], status_code=status.HTTP_200_OK)
@@ -46,5 +46,6 @@ async def user_messages(chat_service: ChatService = Depends(Provide[ChatContaine
 @chat_router.post('/online_users', tags=['chat'], status_code=status.HTTP_200_OK)
 @inject
 async def online_users(users_list: UserList, chat_service: ChatService = Depends(Provide[ChatContainer.chat_service]),
-                        bearer: HTTPAuthorizationCredentials = Depends(user_auth)):
+                       bearer: HTTPAuthorizationCredentials = Depends(user_auth)):
+    users_list.users
     return await chat_service.get_online_users(users_list.users)

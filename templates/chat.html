@@ -101,7 +101,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="http://127.0.0.1:8000/chat" class="menu-link">
+              <a href="http://127.0.0.1:8000/chat" class="menu-link chat__link">
                 <i class="menu-icon tf-icons ti ti-messages"></i>
                 <div>Chat</div>
               </a>
@@ -124,21 +124,20 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../static/vuexy/assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                      <img src="https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png" alt class="h-auto rounded-circle profile__img" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                       <div class="dropdown-item">
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../static/vuexy/assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                              <img src="https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png" alt class="h-auto rounded-circle profile__img" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block profile__username1"></span>
                           </div>
                         </div>
                       </div>
@@ -163,137 +162,9 @@
           <div class="content-wrapper">
              <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y pb-0">
               <div class="app-chat card overflow-hidden">
                 <div class="row g-0">
-                  <!-- Sidebar Left -->
-                  <div class="col app-chat-sidebar-left app-sidebar overflow-hidden" id="app-chat-sidebar-left">
-                    <div
-                      class="chat-sidebar-left-user sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-4 pt-5"
-                    >
-                      <div class="avatar avatar-xl avatar-online">
-                        <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                      </div>
-                      <h5 class="mt-2 mb-0">John Doe</h5>
-                      <small>Admin</small>
-                      <i
-                        class="ti ti-x ti-sm cursor-pointer close-sidebar"
-                        data-bs-toggle="sidebar"
-                        data-overlay
-                        data-target="#app-chat-sidebar-left"
-                      ></i>
-                    </div>
-                    <div class="sidebar-body px-4 pb-4">
-                      <div class="my-4">
-                        <p class="text-muted text-uppercase">About</p>
-                        <textarea
-                          id="chat-sidebar-left-user-about"
-                          class="form-control chat-sidebar-left-user-about mt-3"
-                          rows="4"
-                          maxlength="120"
-                        >
-Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.</textarea
-                        >
-                      </div>
-                      <div class="my-4">
-                        <p class="text-muted text-uppercase">Status</p>
-                        <div class="d-grid gap-1">
-                          <div class="form-check form-check-success">
-                            <input
-                              name="chat-user-status"
-                              class="form-check-input"
-                              type="radio"
-                              value="active"
-                              id="user-active"
-                              checked
-                            />
-                            <label class="form-check-label" for="user-active">Active</label>
-                          </div>
-                          <div class="form-check form-check-danger">
-                            <input
-                              name="chat-user-status"
-                              class="form-check-input"
-                              type="radio"
-                              value="busy"
-                              id="user-busy"
-                            />
-                            <label class="form-check-label" for="user-busy">Busy</label>
-                          </div>
-                          <div class="form-check form-check-warning">
-                            <input
-                              name="chat-user-status"
-                              class="form-check-input"
-                              type="radio"
-                              value="away"
-                              id="user-away"
-                            />
-                            <label class="form-check-label" for="user-away">Away</label>
-                          </div>
-                          <div class="form-check form-check-secondary">
-                            <input
-                              name="chat-user-status"
-                              class="form-check-input"
-                              type="radio"
-                              value="offline"
-                              id="user-offline"
-                            />
-                            <label class="form-check-label" for="user-offline">Offline</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="my-4">
-                        <p class="text-muted text-uppercase">Settings</p>
-                        <ul class="list-unstyled d-grid gap-2 me-3">
-                          <li class="d-flex justify-content-between align-items-center">
-                            <div>
-                              <i class="ti ti-message me-1"></i>
-                              <span class="align-middle">Two-step Verification</span>
-                            </div>
-                            <label class="switch switch-primary me-4">
-                              <input type="checkbox" class="switch-input" checked="" />
-                              <span class="switch-toggle-slider">
-                                <span class="switch-on"></span>
-                                <span class="switch-off"></span>
-                              </span>
-                            </label>
-                          </li>
-                          <li class="d-flex justify-content-between align-items-center">
-                            <div>
-                              <i class="ti ti-bell me-1"></i>
-                              <span class="align-middle">Notification</span>
-                            </div>
-                            <label class="switch switch-primary me-4">
-                              <input type="checkbox" class="switch-input" />
-                              <span class="switch-toggle-slider">
-                                <span class="switch-on"></span>
-                                <span class="switch-off"></span>
-                              </span>
-                            </label>
-                          </li>
-                          <li>
-                            <i class="ti ti-user-plus me-1"></i>
-                            <span class="align-middle">Invite Friends</span>
-                          </li>
-                          <li>
-                            <i class="ti ti-trash me-1"></i>
-                            <span class="align-middle">Delete Account</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="d-flex mt-4">
-                        <button
-                          class="btn btn-primary"
-                          data-bs-toggle="sidebar"
-                          data-overlay
-                          data-target="#app-chat-sidebar-left"
-                        >
-                          Logout
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Sidebar Left-->
-
                   <!-- Chat & Contacts -->
                   <div
                     class="col app-chat-contacts app-sidebar flex-grow-0 overflow-hidden border-end"
@@ -308,8 +179,8 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
                           data-target="#app-chat-sidebar-left"
                         >
                           <img
-                            class="user-avatar rounded-circle cursor-pointer"
-                            src="../static/vuexy/assets/img/avatars/1.png"
+                            class="user-avatar rounded-circle cursor-pointer profile__img"
+                            src="https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png"
                             alt="Avatar"
                           />
                         </div>
@@ -334,55 +205,13 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
                     <hr class="container-m-nx m-0" />
                     <div class="sidebar-body">
                       <div class="chat-contact-list-item-title">
-                        <h5 class="text-primary mb-0 px-4 pt-3 pb-2">Onilne Users</h5>
+                        <h5 class="text-primary mb-0 px-4 pt-3 pb-2">Online Users</h5>
                       </div>
                       <!-- Chats -->
-                      <ul class="list-unstyled chat-contact-list" id="chat-list">
-                        <li class="chat-contact-list-item chat-list-item-0 d-none">
-                          <h6 class="text-muted mb-0">No Chats Found</h6>
-                        </li>
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-online">
-                              <img src="../static/vuexy/assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-2">
-                              <h6 class="chat-contact-name text-truncate m-0">Waldemar Mannering</h6>
-                              <p class="chat-contact-status text-muted text-truncate mb-0">
-                                Refer friends. Get rewards.
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">5 Minutes</small>
-                          </a>
-                        </li>
-                        <li class="chat-contact-list-item active">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-offline">
-                              <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-2">
-                              <h6 class="chat-contact-name text-truncate m-0">Felecia Rower</h6>
-                              <p class="chat-contact-status text-muted text-truncate mb-0">
-                                I will purchase it for sure. 👍
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">30 Minutes</small>
-                          </a>
-                        </li>
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-busy">
-                              <span class="avatar-initial rounded-circle bg-label-success">CM</span>
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-2">
-                              <h6 class="chat-contact-name text-truncate m-0">Calvin Moore</h6>
-                              <p class="chat-contact-status text-muted text-truncate mb-0">
-                                If it takes long you can mail inbox user
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">1 Day</small>
-                          </a>
-                        </li>
+                      <ul class="list-unstyled chat-contact-list" id="online-users-list">
+<!--                        <li class="chat-contact-list-item chat-list-item-0 d-none">-->
+<!--                          <h6 class="text-muted mb-0">No Chats Found</h6>-->
+<!--                        </li>-->
                       </ul>
                     </div>
                   </div>
@@ -391,296 +220,38 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
                   <!-- Chat History -->
                   <div class="col app-chat-history bg-body">
                     <div class="chat-history-wrapper">
-                      <div class="chat-history-body bg-body">
-                        <ul class="list-unstyled chat-history">
-                          <li class="chat-message chat-message-right">
-                            <div class="d-flex overflow-hidden">
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">How can we help? We're here for you! 😄</p>
-                                </div>
-                                <div class="text-end text-muted mt-1">
-                                  <small>10:00 AM</small>
-                                </div>
-                              </div>
-                              <div class="user-avatar flex-shrink-0 ms-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message">
-                            <div class="d-flex overflow-hidden">
-                              <div class="user-avatar flex-shrink-0 me-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Hey John, I am looking for the best admin template.</p>
-                                  <p class="mb-0">Could you please help me to find it out? 🤔</p>
-                                </div>
-                                <div class="chat-message-text mt-2">
-                                  <p class="mb-0">It should be Bootstrap 5 compatible.</p>
-                                </div>
-                                <div class="text-muted mt-1">
-                                  <small>10:02 AM</small>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message chat-message-right">
-                            <div class="d-flex overflow-hidden">
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Vuexy has all the components you'll ever need in a app.</p>
-                                </div>
-                                <div class="text-end text-muted mt-1">
-                                  <small>10:03 AM</small>
-                                </div>
-                              </div>
-                              <div class="user-avatar flex-shrink-0 ms-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message">
-                            <div class="d-flex overflow-hidden">
-                              <div class="user-avatar flex-shrink-0 me-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Looks clean and fresh UI. 😃</p>
-                                </div>
-                                <div class="chat-message-text mt-2">
-                                  <p class="mb-0">It's perfect for my next project.</p>
-                                </div>
-                                <div class="chat-message-text mt-2">
-                                  <p class="mb-0">How can I purchase it?</p>
-                                </div>
-                                <div class="text-muted mt-1">
-                                  <small>10:05 AM</small>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message chat-message-right">
-                            <div class="d-flex overflow-hidden">
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Thanks, you can purchase it.</p>
-                                </div>
-                                <div class="text-end text-muted mt-1">
-                                  <small>10:06 AM</small>
-                                </div>
-                              </div>
-                              <div class="user-avatar flex-shrink-0 ms-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message">
-                            <div class="d-flex overflow-hidden">
-                              <div class="user-avatar flex-shrink-0 me-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">I will purchase it for sure. 👍</p>
-                                </div>
-                                <div class="chat-message-text mt-2">
-                                  <p class="mb-0">Thanks.</p>
-                                </div>
-                                <div class="text-muted mt-1">
-                                  <small>10:08 AM</small>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message chat-message-right">
-                            <div class="d-flex overflow-hidden">
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Great, Feel free to get in touch.</p>
-                                </div>
-                                <div class="text-end text-muted mt-1">
-                                  <small>10:10 AM</small>
-                                </div>
-                              </div>
-                              <div class="user-avatar flex-shrink-0 ms-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message">
-                            <div class="d-flex overflow-hidden">
-                              <div class="user-avatar flex-shrink-0 me-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                              <div class="chat-message-wrapper flex-grow-1">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">Do you have design files for Vuexy?</p>
-                                </div>
-                                <div class="text-muted mt-1">
-                                  <small>10:15 AM</small>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="chat-message chat-message-right">
-                            <div class="d-flex overflow-hidden">
-                              <div class="chat-message-wrapper flex-grow-1 w-50">
-                                <div class="chat-message-text">
-                                  <p class="mb-0">
-                                    Yes that's correct documentation file, Design files are included with the template.
-                                  </p>
-                                </div>
-                                <div class="text-end text-muted mt-1">
-                                  <small>10:15 AM</small>
-                                </div>
-                              </div>
-                              <div class="user-avatar flex-shrink-0 ms-3">
-                                <div class="avatar avatar-sm">
-                                  <img src="../static/vuexy/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-                                </div>
-                              </div>
-                            </div>
-                          </li>
+                      <div id="chatBody" class="chat-history-body bg-body">
+                        <ul id="chatHistory" class="list-unstyled chat-history">
+
                         </ul>
                       </div>
                       <!-- Chat message form -->
                       <div class="chat-history-footer shadow-sm">
-                        <form class="form-send-message d-flex justify-content-between align-items-center">
+                        <div class="form-send-message d-flex justify-content-between align-items-center">
                           <input
-                            class="form-control message-input border-0 me-3 shadow-none"
+                            class="form-control message-input border-0 me-3 shadow-none" id="messageText"
                             placeholder="Type your message here"
                           />
                           <div class="message-actions d-flex align-items-center">
-                            <label for="attach-doc" class="form-label mb-0">
+                            <label for="imageInput" class="form-label mb-0">
                               <i class="ti ti-photo ti-sm cursor-pointer mx-3"></i>
-                              <input type="file" id="attach-doc" hidden />
+                              <input type="file" id="imageInput" hidden />
                             </label>
                             <button class="btn btn-primary d-flex send-msg-btn">
                               <i class="ti ti-send me-md-1 me-0"></i>
-                              <span class="align-middle d-md-inline-block d-none">Send</span>
+                              <span class="align-middle d-md-inline-block d-none" >Send</span>
                             </button>
                           </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <!-- /Chat History -->
-
-                  <!-- Sidebar Right -->
-                  <div class="col app-chat-sidebar-right app-sidebar overflow-hidden" id="app-chat-sidebar-right">
-                    <div
-                      class="sidebar-header d-flex flex-column justify-content-center align-items-center flex-wrap px-4 pt-5"
-                    >
-                      <div class="avatar avatar-xl avatar-online">
-                        <img src="../static/vuexy/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                      </div>
-                      <h6 class="mt-2 mb-0">Felecia Rower</h6>
-                      <span>NextJS Developer</span>
-                      <i
-                        class="ti ti-x ti-sm cursor-pointer close-sidebar d-block"
-                        data-bs-toggle="sidebar"
-                        data-overlay
-                        data-target="#app-chat-sidebar-right"
-                      ></i>
-                    </div>
-                    <div class="sidebar-body px-4 pb-4">
-                      <div class="my-4">
-                        <p class="text-muted text-uppercase">About</p>
-                        <p class="mb-0 mt-3">
-                          A Next. js developer is a software developer who uses the Next. js framework alongside ReactJS
-                          to build web applications.
-                        </p>
-                      </div>
-                      <div class="my-4">
-                        <p class="text-muted text-uppercase">Personal Information</p>
-                        <ul class="list-unstyled d-grid gap-2 mt-3">
-                          <li class="d-flex align-items-center">
-                            <i class="ti ti-mail"></i>
-                            <span class="align-middle ms-2">josephGreen@email.com</span>
-                          </li>
-                          <li class="d-flex align-items-center">
-                            <i class="ti ti-phone-call"></i>
-                            <span class="align-middle ms-2">+1(123) 456 - 7890</span>
-                          </li>
-                          <li class="d-flex align-items-center">
-                            <i class="ti ti-clock"></i>
-                            <span class="align-middle ms-2">Mon - Fri 10AM - 8PM</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="mt-4">
-                        <p class="text-muted text-uppercase">Options</p>
-                        <ul class="list-unstyled d-grid gap-2 mt-3">
-                          <li class="cursor-pointer d-flex align-items-center">
-                            <i class="ti ti-badge"></i>
-                            <span class="align-middle ms-2">Add Tag</span>
-                          </li>
-                          <li class="cursor-pointer d-flex align-items-center">
-                            <i class="ti ti-star"></i>
-                            <span class="align-middle ms-2">Important Contact</span>
-                          </li>
-                          <li class="cursor-pointer d-flex align-items-center">
-                            <i class="ti ti-photo"></i>
-                            <span class="align-middle ms-2">Shared Media</span>
-                          </li>
-                          <li class="cursor-pointer d-flex align-items-center">
-                            <i class="ti ti-trash"></i>
-                            <span class="align-middle ms-2">Delete Contact</span>
-                          </li>
-                          <li class="cursor-pointer d-flex align-items-center">
-                            <i class="ti ti-ban"></i>
-                            <span class="align-middle ms-2">Block Contact</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Sidebar Right -->
-
                   <div class="app-overlay"></div>
                 </div>
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl">
-                <div
-                  class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column"
-                >
-                  <div>
-                    ©
-                    <script>
-                      document.write(new Date().getFullYear());
-                    </script>
-                    , made with ❤️ by Avada Media
-                  </div>
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
@@ -723,8 +294,262 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
       <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+
     <script>
-        $('.logout_btn').on('click',function () {
+      let userData;
+      let base64Image = ''
+
+        $("#imageInput").change(function () {
+            var selectedFile = this.files[0];
+
+            if (selectedFile) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var image = new Image();
+                    image.classList.add("rounded", "pt-1", "mb-3")
+                    image.height = "100"
+                    image.width = "100"
+                    image.alt = "User avatar"
+                    image.src = e.target.result;
+                    base64Image = e.target.result;
+
+                    $("#imageContainer").empty().text($("#imageInput").val())
+
+                };
+
+                reader.readAsDataURL(selectedFile);
+
+            }
+        });
+
+      const socketio_url = 'http://' + window.location.hostname + ':8001'
+      const socket = io(socketio_url);
+
+
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+      socket.on('disconnect', () => {
+        console.log('Disconnected to server');
+      });
+
+      socket.on('joined_user', (data) => {
+        const usersList = $('#online-users-list');
+        usersList.html('');
+        if (data['users'].length > 0) {
+                setUserChat(data['users'])
+        }
+
+      });
+
+      $('.send-msg-btn').on('click',function () {
+        sendMessage()
+      })
+      $('#messageText').keyup(function (e) {
+          if (e.keyCode === 13) {  // enter, return
+              sendMessage()
+          }
+      })
+      socket.on('new_message', (data) => {
+            setMessages(userData['id'], data['message'])
+            $('#chatBody').scrollTop($('#chatBody')[0].scrollHeight)
+      });
+
+      function sendMessage() {
+            let text = $('#messageText').val()
+            if (text.length && $.trim(text).length || base64Image !== '') {
+                let send_message_api_url = window.location.origin + "/api/v1/send_message"
+                $.ajax({
+                    method: 'post',
+                    dataType: 'json',
+                    headers: {
+                        "Content-Type": 'application/json',
+                    },
+                    url: send_message_api_url,
+                    data: JSON.stringify({
+                        "text": text,
+                        "image": base64Image
+                    }),
+                    success: function (data) {
+                        $('#messageText').val('');
+                        base64Image = ''
+                    }
+                })
+            }
+        }
+
+
+      function setUserChat(users) {
+            var userList = $.map(users, function (elem) {
+                return parseInt(elem, 10);
+            });
+            let get_user_api_url = window.location.origin + "/api/v1/online_users"
+            $.ajax({
+                method: 'post',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: get_user_api_url,
+                data: JSON.stringify({
+                    "users": userList
+                }),
+                success: function (data) {
+                    data.forEach((user) => {
+                        let avatar = "<img src='" + user.avatar + "' alt class='h-auto rounded-circle'/>"
+                        let usersList = $('#online-users-list');
+                        usersList.append(
+                            '<li id="user_' + user.id + '" class="chat-contact-list-item">' +
+                            '<a class="d-flex align-items-center">' +
+                            '<div class="flex-shrink-0 avatar avatar-online">' +
+                            avatar +
+                            '</div>' +
+                            '<div class="chat-contact-info flex-grow-1 ms-2">' +
+                            '<h6 class="chat-contact-name text-truncate m-0">' + user.username + '</h6>' +
+                            '</div>' +
+                            '</a>' +
+                            '</li>')
+                    })
+                },
+                error: function (data) {
+                    console.log("error", data.responseJSON.detail)
+
+                }
+            })
+        }
+
+
+        <!-- GetContext -->
+        $.ajax({
+          url: `/api/v1/user_by_token`,         /* Куда отправить запрос */
+          method: 'get',             /* Метод запроса (post или get) */
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
+            userData = data
+            $('.profile__img').each(function () {
+              $(this).attr('src', `${data['avatar']}`)
+            })
+            $('.profile__username1').html(data['username'])
+            socket.emit('join', {user_id: data['id'], room: data['id']});
+            socket.emit('join', {user_id: data['id'], room: 'chat'});
+            getChatMessages(data['id'])
+          },
+          error: function (xhr, status, error) {
+            default_error_msg(xhr, status, error)
+          }
+        });
+
+        // get messages
+
+        function setMessages(user_id, elem) {
+            let chatHistory = $('#chatHistory')
+            let chatAvatar  = '<img src="' + elem.user_avatar + '"alt="Avatar" class="rounded-circle">'
+
+            let chatImage = ''
+            if (elem.image !== '')
+                chatImage = '<div><img class="img-fluid rounded mt-2" height="250px" width="250px" src="' + elem.image + '"></div>'
+            if (user_id === elem.user_id) {
+                chatHistory.append(
+                    '<li class="chat-message chat-message-right">' +
+                    '<div class="d-flex overflow-hidden">' +
+                    '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+                    '<div class="chat-message-text">' +
+                    '<p class="mb-0">' +
+                    elem.text
+                    + '</p>' +
+                    chatImage +
+                    '</div>' +
+
+                    '<div class="text-end text-muted mt-1">' +
+                    '<small>' + elem.date + '</small>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="user-avatar flex-shrink-0 ms-3">' +
+                    '<div class="avatar avatar-sm">' +
+                    chatAvatar
+                    + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    ' </li>'
+                )
+            } else {
+                chatHistory.append(
+                    '<li><div class="row mb-2">' +
+                    '<h6 class="m-0">' + elem.username + '</h6>' +
+                    '</div></li>' +
+                    '<li class="chat-message">' +
+                    '<div class="d-flex overflow-hidden">' +
+                    '<div class="user-avatar flex-shrink-0 me-3">' +
+                    '<div class="avatar avatar-sm">' +
+                    chatAvatar +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="chat-message-wrapper flex-grow-1">' +
+                    '<div class="chat-message-text">' +
+                    '<p class="mb-0">' + elem.text + '</p>' + chatImage +
+                    '</div>' +
+                    '<div class="text-muted mt-1">' +
+                    '<small>' + elem.date + '</small>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>'
+                )
+            }
+
+        }
+
+        function getChatMessages(user_id) {
+
+            let chat_history_api_url = window.location.origin + "/api/v1/get_chat?limit=10"
+            $.ajax({
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: chat_history_api_url,
+                success: function (data) {
+
+                    var reversedArray = data.reverse();
+                    reversedArray.forEach((element) => setMessages(user_id, element));
+                  // $('#chatBody').scrollTop($('#chatBody')[0].scrollHeight);
+                  scrollToAnchor();
+
+
+                },
+                error: function (data) {
+                    console.log("error", data.responseJSON.detail)
+                    window.location.href = '/auth_login'
+                }
+            })
+        }
+        function scrollToAnchor(){
+          const t_tag = $("#chatHistory").children().last();
+          setTimeout(
+              function()
+              {
+                $('#chatBody').animate({scrollTop: t_tag.offset().top},'fast');
+              }, 1000);
+        }
+
+        // get messages
+       function default_error_msg(xhr, status, error){
+          Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: xhr.responseJSON['detail'],
+                showConfirmButton: false,
+                timer: 3000
+          })
+       }
+
+        <!-- LogOut -->
+
+       $('.logout_btn').on('click',function () {
             $.ajax({
                   url: `/api/v1/logout`,         /* Куда отправить запрос */
                   method: 'post',             /* Метод запроса (post или get) */
@@ -734,17 +559,35 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
                     window.location.href = '/login'
                   },
                   error: function (xhr, status, error) {
-                    Swal.fire({
-                      position: 'center',
-                      icon: 'error',
-                      title: error,
-                      showConfirmButton: false,
-                      timer: 1500
-                    })
+                    default_error_msg(xhr, status, error)
                   }
             });
             return false;
+       })
+
+
+         //     <!-- Chat access -->
+
+        $('.chat__link').on('click',function (e) {
+          let chat_access = window.location.origin + '/api/v1/chat_access'
+          $.ajax({
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: chat_access,
+              success: function (data) {
+                window.location.href = '/chat'
+              },
+              error: function (xhr, status, error) {
+                default_error_msg(xhr, status, error)
+              }
+
+            })
+          return false;
         })
+        // <!-- Chat access -->
 
     </script>
   </body>

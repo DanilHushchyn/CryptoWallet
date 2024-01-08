@@ -104,7 +104,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="http://127.0.0.1:8000/chat" class="menu-link">
+              <a href="http://127.0.0.1:8000/chat" class="menu-link chat__link">
                 <i class="menu-icon tf-icons ti ti-messages"></i>
                 <div>Chat</div>
               </a>
@@ -129,15 +129,14 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                       <div class="dropdown-item">
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                               <img src="https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png" alt class="h-auto rounded-circle profile__img" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block ">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block profile__username1"></span>
                           </div>
                         </div>
                       </div>
@@ -203,7 +202,7 @@
                           <div class="mb-3 col-md-6">
                             <label for="username" class="form-label">Username</label>
                             <input
-                              class="form-control profile__username"
+                              class="form-control profile__username2"
                               type="text"
                               id="username"
                               name="username"
@@ -404,9 +403,8 @@
               $('.profile__img').each(function () {
                 $(this).attr('src',`${data['avatar']}`)
               })
-              $('.profile__username').each(function () {
-                $(this).attr('value',`${data['username']}`)
-              })
+              $('.profile__username1').html(data['username'])
+              $('.profile__username2').attr('value',`${data['username']}`)
               $('.profile__email').each(function () {
                 $(this).attr('value',`${data['email']}`)
               })
@@ -660,6 +658,27 @@
             })
         }
         <!-- Import wallet -->
+        <!-- Chat access -->
+        $('.chat__link').on('click',function (e) {
+          let chat_access = window.location.origin + '/api/v1/chat_access'
+          $.ajax({
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: chat_access,
+              success: function (data) {
+                window.location.href = '/chat'
+              },
+              error: function (xhr, status, error) {
+                default_error_msg(xhr, status, error)
+              }
+
+            })
+          return false;
+        })
+        <!-- Chat access -->
     </script>
     <!-- Page JS -->
   </body>

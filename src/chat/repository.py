@@ -1,9 +1,12 @@
 from datetime import datetime
 from typing import Callable
 from fastapi import HTTPException
+from propan import RabbitBroker
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
+
+from config.settings import RABBITMQ_URL
 from src.chat.models import ChatMessage
 from src.chat.schemas import MessageForm, ChatForm
 from src.gateway.models import User
@@ -15,8 +18,12 @@ class ChatRepository:
 
     async def get_online_users(self, users):
         async with self.session_factory() as session:
-            result = await session.execute(select(User).where(User.id.in_(users)))
-            _users = result.scalars().all()
+            # result = await session.execute(select(User).where(User.id.in_(users)))
+            _users = []
+            for user_id in users:
+                user = await session.get(User, user_id)
+                _users.append(user)
+            # _users = result.scalars().all()
             return _users
 
     async def user_messages(self, user_id):
@@ -31,8 +38,8 @@ class ChatRepository:
             if user.chat_access:
                 return True
             else:
-                return False
-
+                raise HTTPException(status_code=405,
+                                    detail='Wait for a minute and try again ☹')
     async def add(self, message: MessageForm, user_id: int):
         async with self.session_factory() as session:
             user = await session.get(User, user_id)
@@ -44,6 +51,19 @@ class ChatRepository:
                 session.add(chat_message)
                 await session.commit()
                 await session.refresh(chat_message)
+                message = {
+                    "user_id": user.id,
+                    "text": chat_message.text,
+                    "image": chat_message.image,
+                    "date": await self.format_time(chat_message.date),
+                    "username": user.username,
+                    "user_avatar": user.avatar
+                }
+                async with RabbitBroker(RABBITMQ_URL) as broker:
+                    await broker.publish(
+                        message={'message': message,
+                                 'room': 'chat'},
+                        queue='socketio/new_message')
                 return ChatForm(
                     user_id=user.id,
                     text=chat_message.text,
@@ -54,7 +74,7 @@ class ChatRepository:
                 )
             else:
                 raise HTTPException(status_code=401,
-                                    detail='Вы не можете пользоваться чатом ☹')
+                                    detail='You cannot use chat ☹')
 
     async def get_chat_messages(self) -> list[ChatForm]:
         async with self.session_factory() as session:

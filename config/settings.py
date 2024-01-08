@@ -45,6 +45,7 @@ CELERY_BROKER_URL = env('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 
 QUICKNODE_URL = env('QUICKNODE_URL')
+CHAINSTACK = env('CHAINSTACK')
 MORALIS_API_KEY = env('MORALIS_API_KEY')
 
 SPACES_ACCESS_KEY_ID = env('SPACES_ACCESS_KEY_ID')
@@ -63,5 +64,5 @@ WIRING_CONFIG = [
     'src.ibay',
     'src.delivery',
     'src.boto3',
-    # 'src.parser',
+    'src.parser',
 ]

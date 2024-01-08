@@ -7,7 +7,7 @@ socketio:
 
 
 worker:
-	celery -A config_celery.celery.celery_app worker --loglevel=info
+	celery -A config_celery.celery_app.celery_application worker --loglevel=info
 
 
 migration:

@@ -68,16 +68,16 @@ document.addEventListener('DOMContentLoaded', function () {
     scrollToBottom();
 
     // User About Maxlength Init
-    if (chatSidebarLeftUserAbout.length) {
-      chatSidebarLeftUserAbout.maxlength({
-        alwaysShow: true,
-        warningClass: 'label label-success bg-success text-white',
-        limitReachedClass: 'label label-danger',
-        separator: '/',
-        validate: true,
-        threshold: 120
-      });
-    }
+    // if (chatSidebarLeftUserAbout.length) {
+    //   chatSidebarLeftUserAbout.maxlength({
+    //     alwaysShow: true,
+    //     warningClass: 'label label-success bg-success text-white',
+    //     limitReachedClass: 'label label-danger',
+    //     separator: '/',
+    //     validate: true,
+    //     threshold: 120
+    //   });
+    // }
 
     // Update user status
     chatUserStatus.forEach(el => {
@@ -148,11 +148,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
       // Display no search fount if searchListItemsCount == 0
-      if (searchListItemsCount == 0) {
-        listItem0.classList.remove('d-none');
-      } else {
-        listItem0.classList.add('d-none');
-      }
+      // if (searchListItemsCount == 0) {
+      //   listItem0.classList.remove('d-none');
+      // } else {
+      //   listItem0.classList.add('d-none');
+      // }
     }
 
     // Send Message

@@ -16,6 +16,7 @@ import src.wallet.models
 import src.chat.models
 import src.ibay.models
 import src.delivery.models
+import src.parser.models
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

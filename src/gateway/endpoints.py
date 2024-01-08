@@ -21,8 +21,7 @@ from src.gateway.schemas import UserProfile, RegisterUserModel, AuthUsers
 from src.gateway.services.auth import AuthService
 from src.gateway.services.users import UserService
 from utils.auth_operations import get_user_from_bearer
-from src.gateway.tasks import mailing_task
-
+from src.gateway.tasks import mailing_task, chat_access_task
 
 main_router = APIRouter()
 user_auth = CustomJWTAuth()
@@ -124,4 +123,6 @@ async def registration(
 ):
     user = await auth_service.register_user(user)
     mailing_task.delay(email_address=user.email)
+    if user.id:
+        chat_access_task.apply_async(args=[user.id], countdown=60)
     return user

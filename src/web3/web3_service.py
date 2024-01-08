@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from propan import RabbitBroker
 from web3 import AsyncWeb3, AsyncHTTPProvider, Web3
 from web3.eth import AsyncEth
-from config.settings import QUICKNODE_URL, MORALIS_API_KEY, RABBITMQ_URL
+from config.settings import QUICKNODE_URL, MORALIS_API_KEY, RABBITMQ_URL, CHAINSTACK
 from src.web3.repository import WebRepository
 
 
@@ -25,7 +25,7 @@ class WebService:
 
     def __init__(self, web3_repository: WebRepository):
         self._repository: WebRepository = web3_repository
-        self.w3 = AsyncWeb3(AsyncHTTPProvider(QUICKNODE_URL), modules={'eth': (AsyncEth,)})
+        self.w3 = AsyncWeb3(AsyncHTTPProvider(CHAINSTACK, request_kwargs={'timeout': 120}), modules={'eth': (AsyncEth,)})
         self.socket_w3 = Web3(Web3.WebsocketProvider(
             'wss://blissful-side-panorama.ethereum-sepolia.quiknode.pro/3a09730228a180516dca38e9d88d5693881d84cd/'))
 
@@ -74,7 +74,7 @@ class WebService:
                 return transactions_list
             else:
                 raise HTTPException(status_code=401,
-                                    detail=f"Moralis API пишет данные неверны:, {response.status_code}")
+                                    detail=f"Moralis API says that data is wrong:, {response.status_code}")
 
     async def get_transaction(self, _hash):
         try:
@@ -85,7 +85,7 @@ class WebService:
                     'timestamp': datetime.fromtimestamp(block.timestamp).strftime('%Y-%m-%d %H:%M:%S'),
                     'status': transaction_receipt.get('status')}
         except ValueError:
-            raise HTTPException(status_code=401, detail=f"Ошибка не правильный хэш:, {_hash}")
+            raise HTTPException(status_code=401, detail=f"Error, wrong hash:, {_hash}")
 
     # async def transaction_info(self, tx_hash):
     #     tx = await self.w3.eth.get_transaction(tx_hash)

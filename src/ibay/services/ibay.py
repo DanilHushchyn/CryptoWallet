@@ -30,6 +30,8 @@ class IBayService:
     async def add_product(self, product, user_id):
         if not product.image == '':
             product.image = await self.boto3_service.upload_image(product.image)
+        else:
+            product.image = 'https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png'
         return await self._repository.add(product, user_id)
 
     async def get_products(self):

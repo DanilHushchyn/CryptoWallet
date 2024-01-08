@@ -104,7 +104,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="http://127.0.0.1:8000/chat" class="menu-link">
+              <a href="http://127.0.0.1:8000/chat" class="menu-link chat__link">
                 <i class="menu-icon tf-icons ti ti-messages"></i>
                 <div>Chat</div>
               </a>
@@ -130,15 +130,14 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                       <div class="dropdown-item">
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                               <img src="https://crypto.fra1.cdn.digitaloceanspaces.com/crypto/default.png" alt class="h-auto rounded-circle profile__img" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block profile__username1"></span>
                           </div>
                         </div>
                       </div>
@@ -236,7 +235,7 @@
               <div class="modal-body p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <h5 class="text-center">Dispatch completed.</h5>
-                <p class="card-text text-center">Dispatch completed.<a href="#">Transaction link</a></p>
+                <p class="card-text text-center">Dispatch completed.<a href="#" class="trans_link">Transaction link</a></p>
               </div>
             </div>
           </div>
@@ -290,6 +289,59 @@
         socket.on('disconnect', () => {
             console.log('Disconnected to server');
         });
+        socket.on('joined_user', (data) => {
+            console.log(data);
+        });
+
+        function updateBalance(address) {
+            let update_wallet_balance_api_url = window.location.origin + "/api/v1/update_wallet_balance?wallet_address="
+            $.ajax({
+                method: 'put',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: update_wallet_balance_api_url + address,
+                success: function (data) {
+                    $('#walletBalance-' + data['id']).text('Balance: '+data['balance'] + ' ETH')
+                },
+            })
+        }
+        socket.on('update_balance', (data) => {
+            updateBalance(data['address'])
+        });
+
+        socket.on('update_transactions_table', (data) => {
+          console.log(data)
+          let newTR = $(`
+             <tr>
+                <td>
+                  <a href="#" class="resp-text">${data['transaction']['hash']}</a>
+                </td>
+                <td>
+                  <a href="#" class="resp-text">${data['transaction']['from_address']}</a>
+                </td>
+                <td>
+                  <a href="#" class="resp-text">${data['transaction']['to_address']}</a>
+                </td>
+                <td>
+                  ${data['transaction']['value']}<i class="fa-brands fa-ethereum ms-1" style="color: #7367f0;"></i>
+                </td>
+                <td>
+                  ${data['transaction']['date']}
+                </td>
+                <td>
+                  ${data['transaction']['txn_fee']}<i class="fa-solid fa-gas-pump pb-1 ms-1" style="color: #28c76f;"></i>
+                </td>
+                <td>
+                  ${data['transaction']['status']}
+                </td>
+             </tr>
+           `)
+          $(`.trans_tbody_${data['wallet_id']}`).append(newTR)
+            // setTransaction(data.address)
+        });
+
 
 
         <!-- GetContext -->
@@ -303,9 +355,8 @@
               $('.profile__img').each(function () {
                 $(this).attr('src',`${data['avatar']}`)
               })
-              $('.profile__username').each(function () {
-                $(this).attr('value',`${data['username']}`)
-              })
+              $('.profile__username1').html(data['username'])
+              socket.emit('join', {user_id:data['id'],room: data['id']});
               $.ajax({
                   url: `/api/v1/user_wallets?user=${data['id']}`,   /* Куда отправить запрос */
                   method: 'get',   /* Метод запроса (post или get) */
@@ -329,7 +380,7 @@
                                     <p class="card-text">
                                       Address: <a href="https://sepolia.etherscan.io/address/${data[i]['address']}">${data[i]['address']}</a>
                                     </p>
-                                    <p class="card-text">Balance: ${data[i]['balance']} ETH</p>
+                                    <p class="card-text" id="walletBalance-${data[i]}">Balance: ${data[i]['balance']} ETH</p>
                                     <button type="button" class="btn btn-info mb-1 watch_trans" data-address="${data[i]['address']}" data-walletid="${data[i]['id']}" data-bs-toggle="modal" data-bs-target="#trans_${data[i]['id']}">Watch Transactions</button>
                                     <button type="button" class="btn btn-success mb-1 send_trans" data-address="${data[i]['address']}" data-walletid="${data[i]['id']}" data-bs-toggle="modal" data-bs-target="#sendEthModal">Send Transaction</button>
                                     <a href="https://sepoliafaucet.com/"><button type="button" class="btn btn-warning mb-1">Get 10 Free ETH</button></a>
@@ -500,7 +551,7 @@
               contentType: "application/json",
               data: JSON.stringify(json),
                 success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
-                  console.log(1)
+                $('.trans_link').attr('href','https://sepolia.etherscan.io/tx/' + data.hash)
               },
               error: function (xhr, status, error) {
                 default_error_msg(xhr, status, error)
@@ -509,6 +560,28 @@
           return false;
         })
         //send ETH
+        // Chat access
+
+        $('.chat__link').on('click',function (e) {
+          let chat_access = window.location.origin + '/api/v1/chat_access'
+          $.ajax({
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                url: chat_access,
+              success: function (data) {
+                window.location.href = '/chat'
+              },
+              error: function (xhr, status, error) {
+                default_error_msg(xhr, status, error)
+              }
+
+            })
+          return false;
+        })
+        //Chat access
 
 
     </script>
